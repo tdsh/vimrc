@@ -1,0 +1,8 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =6
+let g:netrw_dirhist_1='/root/work/git/mvl6/foundation/recipes/python/python-native'
+let g:netrw_dirhist_2='/tmp/48673'
+let g:netrw_dirhist_3='/tmp/54660'
+let g:netrw_dirhist_4='/root/work/git/mvl6/cge60-main/recipes/initscripts/initscripts-1.0'
+let g:netrw_dirhist_5='/root/work/cvs/userland/iptables/SPECS'
+let g:netrw_dirhist_6='/root/.vim/vundle.git'
