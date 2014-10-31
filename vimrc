@@ -55,4 +55,32 @@ nnoremap <f2> :NERDTreeToggle<CR>
 
 NeoBundle 'terryma/vim-multiple-cursors'
 
+" Markdown Preview
+" <F7> to preview
+NeoBundle 'vim-scripts/vim-auto-save'
+NeoBundle 'kannokanno/previm'
+"NeoBundle 'syui/cscroll.vim'
+NeoBundle 'kana/vim-submode'
+
+augroup PrevimSettings
+	autocmd!
+	autocmd BufNewFile,BufRead *.{md,mdwn,mkd,mkdn,mark*} set filetype=markdown
+augroup END
+
+" Use chrome.
+let g:previm_open_cmd = 'google-chrome --new-window'
+
+nnoremap <silent> <F7> :PrevimOpen<CR>
+
+nmap <silent> <Leader>j <Plug>(ChromeScrollDown)
+nmap <silent> <Leader>k <Plug>(ChromeScrollUp)
+nmap <silent> <Leader>q <Plug>(ChromeTabClose)
+nmap <silent> <Leader>f <Plug>(ChromeKey)
+
+call submode#enter_with('cscroll', 'n', '', '<Leader>j', ':ChromeScrollDown<CR>')
+call submode#enter_with('cscroll', 'n', '', '<Leader>k', ':ChromeScrollUp<CR>')
+call submode#leave_with('cscroll', 'n', '', 'n')
+call submode#map('cscroll', 'n', '', 'j', ':ChromeScrollDown<CR>')
+call submode#map('cscroll', 'n', '', 'k', ':ChromeScrollUp<CR>')
+
 filetype plugin indent on
