@@ -12,6 +12,7 @@ set smartcase	" Identify case only when search characters include upper case
 "set incsearch	" Incremental search
 set hlsearch	" Highlight matched text in search
 set listchars=eol:$,trail:-,nbsp:%	" Special characters of 'set list'
+set diffopt=vertical
 
 " Escape / and ? automatically
 cnoremap <expr> / getcmdtype() == '/' ? '\/' : '/'
@@ -68,7 +69,7 @@ augroup PrevimSettings
 augroup END
 
 " Use chrome.
-let g:previm_open_cmd = 'google-chrome --new-window'
+let g:previm_open_cmd = 'google-chrome --user-data-dir --new-window'
 
 nnoremap <silent> <F7> :PrevimOpen<CR>
 
