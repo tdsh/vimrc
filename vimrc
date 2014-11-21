@@ -21,13 +21,45 @@ cnoremap <expr> ? getcmdtype() == '?' ? '\?' : '?'
 syntax on
 autocmd BufWrite *.py :call Flake8()
 
+" cscope settings
+if has('cscope') && filereadable('/usr/bin/cscope')
+   nmap <C-\>s :cs find s <C-R>=expand("<cword>")<CR><CR>
+   nmap <C-\>g :cs find g <C-R>=expand("<cword>")<CR><CR>
+   nmap <C-\>c :cs find c <C-R>=expand("<cword>")<CR><CR>
+   nmap <C-\>t :cs find t <C-R>=expand("<cword>")<CR><CR>
+   nmap <C-\>e :cs find e <C-R>=expand("<cword>")<CR><CR>
+   nmap <C-\>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
+   nmap <C-\>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
+   nmap <C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>
+
+   nmap <C-@>s :scs find s <C-R>=expand("<cword>")<CR><CR>
+   nmap <C-@>g :scs find g <C-R>=expand("<cword>")<CR><CR>
+   nmap <C-@>c :scs find c <C-R>=expand("<cword>")<CR><CR>
+   nmap <C-@>t :scs find t <C-R>=expand("<cword>")<CR><CR>
+   nmap <C-@>e :scs find e <C-R>=expand("<cword>")<CR><CR>
+   nmap <C-@>f :scs find f <C-R>=expand("<cfile>")<CR><CR>
+   nmap <C-@>i :scs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
+   nmap <C-@>d :scs find d <C-R>=expand("<cword>")<CR><CR>
+
+   nmap <C-@><C-@>s :vert scs find s <C-R>=expand("<cword>")<CR><CR>
+   nmap <C-@><C-@>g :vert scs find g <C-R>=expand("<cword>")<CR><CR>
+   nmap <C-@><C-@>c :vert scs find c <C-R>=expand("<cword>")<CR><CR>
+   nmap <C-@><C-@>t :vert scs find t <C-R>=expand("<cword>")<CR><CR>
+   nmap <C-@><C-@>e :vert scs find e <C-R>=expand("<cword>")<CR><CR>
+   nmap <C-@><C-@>f :vert scs find f <C-R>=expand("<cfile>")<CR><CR>
+   nmap <C-@><C-@>i :vert scs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
+   nmap <C-@><C-@>d :vert scs find d <C-R>=expand("<cword>")<CR><CR>
+endif
+
 "--------------------------------------------------------------------
 " NeoBundle.vim
 "--------------------------------------------------------------------
 if has('vim_starting')
 	" Run when vim starts up only
 	set runtimepath+=~/.vim/bundle/neobundle.vim/
-	call neobundle#rc(expand('~/.vim/bundle/'))
+	call neobundle#begin(expand('~/.vim/bundle/'))
+	NeoBundleFetch 'Shougo/neobundle.vim'
+	call neobundle#end()
 endif
 
 NeoBundle 'rails.vim'
@@ -60,7 +92,6 @@ NeoBundle 'terryma/vim-multiple-cursors'
 " <F7> to preview
 NeoBundle 'vim-scripts/vim-auto-save'
 NeoBundle 'kannokanno/previm'
-"NeoBundle 'syui/cscroll.vim'
 NeoBundle 'kana/vim-submode'
 
 augroup PrevimSettings
@@ -73,15 +104,14 @@ let g:previm_open_cmd = 'google-chrome --user-data-dir --new-window'
 
 nnoremap <silent> <F7> :PrevimOpen<CR>
 
-nmap <silent> <Leader>j <Plug>(ChromeScrollDown)
-nmap <silent> <Leader>k <Plug>(ChromeScrollUp)
-nmap <silent> <Leader>q <Plug>(ChromeTabClose)
-nmap <silent> <Leader>f <Plug>(ChromeKey)
+" vim-markdown
+NeoBundle 'godlygeek/tabular'
+NeoBundle 'rcmdnk/vim-markdown'
 
-call submode#enter_with('cscroll', 'n', '', '<Leader>j', ':ChromeScrollDown<CR>')
-call submode#enter_with('cscroll', 'n', '', '<Leader>k', ':ChromeScrollUp<CR>')
-call submode#leave_with('cscroll', 'n', '', 'n')
-call submode#map('cscroll', 'n', '', 'j', ':ChromeScrollDown<CR>')
-call submode#map('cscroll', 'n', '', 'k', ':ChromeScrollUp<CR>')
+nnoremap <silent> <Space>f :set foldenable
+nnoremap <silent> <Space>w :set nofoldenable
 
+NeoBundle 'ConradIrwin/vim-bracketed-paste'
+
+" This must be the end.
 filetype plugin indent on
