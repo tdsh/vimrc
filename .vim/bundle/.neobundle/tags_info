@@ -1,8 +1,15 @@
+neobundle.vim
 nerdtree
+previm
 python.vim
 rails.vim
+tabular
+vim-auto-save
+vim-bracketed-paste
 vim-flake8
+vim-markdown
 vim-multiple-cursors
 vim-quickrun
+vim-submode
 vim-template
 vimproc

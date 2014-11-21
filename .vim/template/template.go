@@ -1,0 +1,6 @@
+package <+CURSOR+>
+
+import 
+
+func {
+}
